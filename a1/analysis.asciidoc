@@ -48,3 +48,22 @@ constraint. We see that for some words, like _will_, _police_ and _company_
 the closest words make a lot of sense and are very likely to appear in the
 same sentence. For _women_ and _government_ the closest word makes a lot of
 sense but the rest don't seem to be at anything.
+
+Sentence Prediction
+~~~~~~~~~~~~~~~~~~~
+
+
+[width="95%", options="header",frame="topbot",halign="center"]
+|================================================
+| Sentence             | First | Second | Third
+| women also had       | to    | a      | been
+| government of united | .     | states | life
+|================================================
+
+The model seems to have extracted some features of grammar and semantics of the
+english language but not much, for _women also had_ the first 3 predictions are
+grammatically correct, but for _government of united_ only the second one makes
+sense. If we had mor data to train the network on it would probably have better
+prediction of sentences since the 4-gram probabilities would be better for
+the not so frequently occurring terms; over here punctuations seem to have
+higher probabilities than words.
