@@ -33,3 +33,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# VIM Files
+*.swp
+
+# Mac Files
+.DS_STORE
