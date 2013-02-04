@@ -29,3 +29,22 @@ t-SNE Plot
 ~~~~~~~~~~
 
 image::plot.png["t-SNE Plot", scaledwidth="100%"]
+
+Closest Words
+~~~~~~~~~~~~~
+
+[width="95%", options="header",frame="topbot",halign="center"]
+|================================================
+| Candidate  | Nearest    | Second    | Third
+| company    | department | general   | program
+| will       | might      | may       | would
+| government | states     | west      | john
+| police     | west       | general   | officials
+| women      | children   | companies | officials
+|================================================
+
+I've only listen some of the more interesting ones here because of the space
+constraint. We see that for some words, like _will_, _police_ and _company_
+the closest words make a lot of sense and are very likely to appear in the
+same sentence. For _women_ and _government_ the closest word makes a lot of
+sense but the rest don't seem to be at anything.
