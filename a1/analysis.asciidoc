@@ -1,6 +1,7 @@
 CSC 321: Assignment 1
 ====================
 Zeeshan Qureshi <g0zee@cdf.toronto.edu>
+:toc!:
 
 Train Model
 -----------
@@ -28,7 +29,7 @@ Experiment with Model
 t-SNE Plot
 ~~~~~~~~~~
 
-image::plot.png["t-SNE Plot", scaledwidth="100%"]
+image::plot.png["t-SNE Plot", scaledwidth="70%"]
 
 Closest Words
 ~~~~~~~~~~~~~
@@ -52,7 +53,6 @@ sense but the rest don't seem to be at anything.
 Sentence Prediction
 ~~~~~~~~~~~~~~~~~~~
 
-
 [width="95%", options="header",frame="topbot",halign="center"]
 |================================================
 | Sentence             | First | Second | Third
@@ -67,3 +67,33 @@ sense. If we had mor data to train the network on it would probably have better
 prediction of sentences since the 4-gram probabilities would be better for
 the not so frequently occurring terms; over here punctuations seem to have
 higher probabilities than words.
+
+Word Distances
+~~~~~~~~~~~~~~
+
+[width="95%", options="header",frame="topbot",halign="center"]
+|============================================================
+| Pair             | Distance | Pair               | Distance
+| (university, dr) | .55      | (university, $)    | .53
+| (court, company) | 1.08     | (court, companies) | 1.35
+| (money, million) | 2.81     | (money, music)     | 2.00
+|============================================================
+
+Wee see that _doctor_ is closer to _university_ but the symbol _$_ is even
+closer, which doesn't make sense. The word _court_ is close to both _company_
+and _compaies_ which means that the net thinks that they are similar. _money_
+is closer to _music_ than to _million_ which is somewhat expected (pop culture)
+but then _million_ is not even in the top 10 closest words for _money_ which
+is a bit strange. It is probably because our training sentences don't contain
+any data related to financial news or politics.
+
+Summary
+-------
+
+Based on the analysis of the t-SNE plot and sentence prediction we can see that
+the distributed representation of the words helps the model extract features
+from the sentences which would not be possible in a 1-of-n representation. We
+also see that with the increade in the embedding size and hidden units the
+model generalizes pretty well. It remains to be seen how the model would
+extract meaning from a much larger training set and if we would see any strange
+neighbouring words.
