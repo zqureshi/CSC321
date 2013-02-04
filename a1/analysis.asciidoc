@@ -1,0 +1,16 @@
+CSC 321: Assignment 1
+====================
+Zeeshan Qureshi <g0zee@cdf.toronto.edu>
+
+Train Model
+-----------
+
+.Results
+[width="95%",options="header",cols="<,^,^,^,^",frame="topbot"]
+|========================================================
+| Model(d, hid)  | Training | Validation | Test  | Epochs
+| model(8, 32)   | 2.869    | 2.894      | 2.891 | 5
+| model(8, 256)  | 2.783    | 2.821      | 2.823 | 5
+| model(32, 64)  | 2.701    | 2.751      | 2.753 | 8
+| model(32, 256) | 2.547    | 2.638      | 2.646 | 8
+|========================================================
