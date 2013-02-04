@@ -21,3 +21,11 @@ of over-fitting our network to the data if we increase its capacity
 continuously but since our models do early stopping we are disregarding it and
 chosing model(32, 256) as the best since it has the lowest validaton and test
 cross entropy error.
+
+Experiment with Model
+---------------------
+
+t-SNE Plot
+~~~~~~~~~~
+
+image::plot.png["t-SNE Plot", scaledwidth="100%"]
