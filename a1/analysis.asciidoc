@@ -19,7 +19,7 @@ As we increase the number of dimensions in the distributed representation and
 the number of hidden units, the cross entropy error goes down. We run the risk
 of over-fitting our network to the data if we increase its capacity
 continuously but since our models do early stopping we are disregarding it and
-chosing model(32, 256) as the best since it has the lowest validaton and test
+chosing *model(32, 256)* as the best since it has the lowest validaton and test
 cross entropy error.
 
 Experiment with Model
