@@ -179,8 +179,8 @@ function ret = d_loss_by_d_model(model, data, wd_coefficient)
 	 
   % This is the only function that you're expected to change. Right now, it just returns a lot of zeros, which is obviously not the correct output. Your job is to change that.
   [hid_input, hid_output, class_input, log_class_prob, class_prob] = forward_pass(model, data);
-  ret.input_to_hid = model.input_to_hid * 0;
-  ret.hid_to_class = model.hid_to_class * 0;
+  ret.input_to_hid = (((model.hid_to_class' * (class_prob - data.targets)) .* hid_output .* (1 - hid_output)) * data.inputs') / size(data.targets, 2);
+  ret.hid_to_class = ((class_prob - data.targets) * hid_output') / size(data.targets, 2);
 end
 
 function ret = model_to_theta(model)
