@@ -1,4 +1,4 @@
-function a2(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier, do_early_stopping, mini_batch_size)
+function training_data_loss = a2(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier, do_early_stopping, mini_batch_size)
   warning('error', 'Octave:broadcast');
   if exist('page_output_immediately'), page_output_immediately(1); end
   more off;
@@ -72,6 +72,7 @@ function a2(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier, 
     fprintf('The classification loss (i.e. without weight decay) on the %s data is %f\n', data_name, loss(model, data, 0));
     fprintf('The classification error rate on the %s data is %f\n', data_name, classification_performance(model, data));
   end
+  training_data_loss = loss(model, datas.training, wd_coefficient);
 end
 
 function test_gradient(model, data, wd_coefficient)
