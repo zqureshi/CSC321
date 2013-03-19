@@ -1,4 +1,4 @@
-function [valid_log_prob, train_log_prob] = mogem(numupdates, numgaussians, sdinit, pausesecs);
+function [trainlogprob, validlogprob, mixprop] = mogem(numupdates, numgaussians, sdinit, pausesecs, mixprop);
 
 %  mogem(numupdates, numgaussians, sdinit, pausesecs);
 %Simple version of EM that fits a mixture of Gaussians to data.
@@ -23,6 +23,9 @@ posteriors = train_densities;
 train_xdata      = train_data(:,1)';
 train_ydata      = train_data(:,2)';
 
+if nargin < 5
+    mixprop = ones(numgaussians, 1) / numgaussians;
+end
 
 showmog; %% DISPLAYS OUR INITIAL MODEL AND THE DATA;
 pause(pausesecs);
@@ -39,7 +42,8 @@ for i = 1:numupdates,
     xd = repmat(centers(g,1),numcases,1) - valid_data(:,1);
     yd = repmat(centers(g,2),numcases,1) - valid_data(:,2);
     valid_densities(:,g)= (1/(2*pi*sqrt(xv*yv)))*...
-                          exp(-xd.*xd/(2*xv) - yd.*yd/(2*yv));
+                          exp(-xd.*xd/(2*xv) - yd.*yd/(2*yv))*...
+                          mixprop(g);
     %%MODIFY LINE ABOVE IF USING UNEQUAL MIXING PROPORTIONS
   end
 
@@ -49,8 +53,7 @@ for i = 1:numupdates,
   posteriors = valid_densities ./ repmat(sums',1,numgaussians);
 
   fprintf(1, ' valid log prob = %4.5f    ', ...
-          sum(log(  sum(valid_densities')/numgaussians)));
-  valid_log_prob = sum(log(  sum(valid_densities')/numgaussians));
+          sum(log(  sum(valid_densities'))));
 
   %% SET TRAIN DENSITIES %%
   for g=1:numgaussians,
@@ -59,7 +62,8 @@ for i = 1:numupdates,
     xd = repmat(centers(g,1),numcases,1) - train_data(:,1);
     yd = repmat(centers(g,2),numcases,1) - train_data(:,2);
     train_densities(:,g)= (1/(2*pi*sqrt(xv*yv)))*...
-                          exp(-xd.*xd/(2*xv) - yd.*yd/(2*yv));
+                          exp(-xd.*xd/(2*xv) - yd.*yd/(2*yv))*...
+                          mixprop(g);
     %%MODIFY LINE ABOVE IF USING UNEQUAL MIXING PROPORTIONS
   end
 
@@ -67,9 +71,8 @@ for i = 1:numupdates,
   sums = sum(train_densities');
   posteriors = train_densities ./ repmat(sums',1,numgaussians);
 
-  fprintf(1, ' train log prob = %4.5f \n ', ...
-          sum(log(  sum(train_densities')/numgaussians  )));
-  train_log_prob = sum(log(  sum(train_densities')/numgaussians  ));
+  fprintf(1, ' train log prob = %4.5f \n', ...
+          sum(log(  sum(train_densities')  )));
 
 
   %% SET NEW CENTERS AND NEW VARIANCES %%
@@ -83,11 +86,14 @@ for i = 1:numupdates,
     ynoise   = train_ydata - repmat(cy,1,numcases);
     yvars(g) = minvar + sum(r' .* ynoise .* ynoise)/ sum(r);
     %%TO UPDATE MIXING PROPORTIONS, ADD CODE HERE
+    mixprop = sum(posteriors, 1)';
   end
 
   showmog; %% DISPLAYS OUR CURRENT MODEL AND THE DATA;
   pause(pausesecs); %% SLOWS IT DOWN SO WE CAN SEE IT MOVE.
 end
 
+fprintf(1, 'mixing proportions = [%s]\n', sprintf('%.2f ', mixprop));
 
-
+trainlogprob = sum(log(  sum(train_densities')));
+validlogprob = sum(log(  sum(valid_densities')));
