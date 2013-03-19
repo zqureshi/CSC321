@@ -1,4 +1,4 @@
-function [] = mogem(numupdates, numgaussians, sdinit, pausesecs);
+function [valid_log_prob, train_log_prob] = mogem(numupdates, numgaussians, sdinit, pausesecs);
 
 %  mogem(numupdates, numgaussians, sdinit, pausesecs);
 %Simple version of EM that fits a mixture of Gaussians to data.
@@ -50,6 +50,7 @@ for i = 1:numupdates,
 
   fprintf(1, ' valid log prob = %4.5f    ', ...
           sum(log(  sum(valid_densities')/numgaussians)));
+  valid_log_prob = sum(log(  sum(valid_densities')/numgaussians));
 
   %% SET TRAIN DENSITIES %%
   for g=1:numgaussians,
@@ -68,6 +69,7 @@ for i = 1:numupdates,
 
   fprintf(1, ' train log prob = %4.5f \n ', ...
           sum(log(  sum(train_densities')/numgaussians  )));
+  train_log_prob = sum(log(  sum(train_densities')/numgaussians  ));
 
 
   %% SET NEW CENTERS AND NEW VARIANCES %%

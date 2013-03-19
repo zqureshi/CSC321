@@ -16,7 +16,6 @@ affecting the maximum step size on each iteration.
 
 ![Fitting Number of Gaussians](plot-part1.png)\
 
-\newpage
 
  Gaussians    Validation Prob    Training Prob
 -----------  -----------------  ---------------
@@ -29,3 +28,27 @@ affecting the maximum step size on each iteration.
     7           51.6067            98.9465
     8           58.3877            102.3457
 
+Part 2 - Reduce Data
+====================
+
+We see that training probability rises but validation probability stays
+pretty much zero all the time. This shows that there is *not enough
+data* to fit the model properly.
+
+![Fitting Number of Gaussians with Reduced Data](plot-part2.png)\
+
+
+ Gaussians    Validation Prob    Training Prob
+-----------  -----------------  ---------------
+    1           -125.8333          9.6329
+    2           -15.6033           -23.7722
+    3           -9.5407            -10.7525
+    4           4.3274             11.5176
+    5           6.56899            15.1013
+    6           12.7019            29.3574
+    7           4.37568            36.1302
+    8           10.3104            38.5686
+    9           8.02415            40.0637
+    10          6.90185            53.9130
+    11          -6.0408            55.1076
+    12          -0.4819            55.1076

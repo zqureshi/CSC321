@@ -2,8 +2,8 @@ global train_data;
 global valid_data;
 global truenumgaussians;
 
-truenumgaussians = 5; 
-casespergaussian = 25 ;
+truenumgaussians = 10;
+casespergaussian = 10;
 
 
 numcases = casespergaussian*truenumgaussians;
