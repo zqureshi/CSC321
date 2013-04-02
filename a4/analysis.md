@@ -35,3 +35,22 @@ which smoothed out the loss curve and also provided a very fast drop in
 loss over the first few iterations. This gave me an error rate of
 $8.8$%. I then tried out a different number of hidden units and reached
 $8.45$% error at $160$ units.
+
+\clearpage
+
+Part 2
+------
+
+![32 to 224 Hidden Units](part2.png)
+
+
+In the graph we can clearly see that the worst performance with
+pre-training is clearly better than the best performance without it and
+the gap only increases as the number of hidden units go up. We can also
+see that without pre-training the model quickly overfits the data and
+hence loss goes up but with pre-training the model remains generalized
+for much longer and will overfit at a much higher number of units. Thus
+with pre-training we can get a more powerful model without sacrificing
+generalization.
+
+\clearpage
