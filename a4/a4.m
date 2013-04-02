@@ -1,9 +1,12 @@
-function [testloss] = a4(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier, do_early_stopping, mini_batch_size)
+function [testloss] = a4(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier, do_early_stopping, mini_batch_size, initial_values)
 
 warning('error', 'Octave:broadcast');
   if exist('page_output_immediately'), page_output_immediately(1); end
   more off;
   model = initial_model(n_hid);
+  if nargin == 8
+      model.input_to_hid = initial_values';
+  end
   from_data_file = load('a4data.mat');
   datas = from_data_file.a4data;
   n_training_cases = size(datas.training.inputs, 2);
