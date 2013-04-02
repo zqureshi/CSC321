@@ -43,7 +43,6 @@ Part 2
 
 ![32 to 224 Hidden Units](part2.png)
 
-
 In the graph we can clearly see that the worst performance with
 pre-training is clearly better than the best performance without it and
 the gap only increases as the number of hidden units go up. We can also
@@ -54,3 +53,14 @@ with pre-training we can get a more powerful model without sacrificing
 generalization.
 
 \clearpage
+
+Part 3
+------
+
+![20 to 1000 Epochs](part3.png)
+
+As we can see, even by going from 20 to 1000 epochs the test loss only
+decreases by 5% which shows that with 2 orders of magnitude increase in
+epochs the loss decrease was insignificant and thus it is highly
+unprobable that the model could be overfitted by performing too many RBM
+training iterations.
